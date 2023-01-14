@@ -163,7 +163,9 @@ public class Player extends Node implements Actor {
 
     @Override
     public boolean isRunning() {
-        return !this.control.getWalkDirection().equals(Vector3f.ZERO) && inputState.isPressedRun;
+        return !this.control.getWalkDirection().equals(Vector3f.ZERO)
+                && !this.inputState.isPressedBackward
+                && inputState.isPressedRun;
     }
 
 }

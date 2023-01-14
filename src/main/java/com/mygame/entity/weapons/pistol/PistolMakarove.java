@@ -70,7 +70,6 @@ public class PistolMakarove implements Weapon {
         } else if ((state == EnumActorState.STAND_STILL || state == EnumActorState.IN_AIR) && currentState != EnumActorState.STAND_STILL) {
             this.animComposer.setCurrentAction(ANIM_ACTION_IDLE);
             this.currentState = EnumActorState.STAND_STILL;
-            //todo fix
         }
     }
 

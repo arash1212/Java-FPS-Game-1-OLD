@@ -11,15 +11,15 @@ com/mygame/settings/input/InputSettings.java
  com.mygame.settings.input.InputSettings$1
 com/mygame/settings/input/InputState.java
  com.mygame.settings.input.InputState
-com/mygame/entity/interfaces/Actor.java
- com.mygame.entity.interfaces.Actor
 com/mygame/entity/weapons/pistol/PistolMakarove.java
  com.mygame.entity.weapons.pistol.PistolMakarove
-com/mygame/entity/player/Player.java
- com.mygame.entity.player.Player
 com/mygame/levels/Level1.java
  com.mygame.levels.Level1
+com/mygame/entity/interfaces/Actor.java
+ com.mygame.entity.interfaces.Actor
 com/mygame/Main.java
  com.mygame.Main
+com/mygame/entity/player/Player.java
+ com.mygame.entity.player.Player
 com/mygame/levels/Level.java
  com.mygame.levels.Level

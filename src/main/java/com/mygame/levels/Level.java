@@ -34,6 +34,8 @@ public interface Level {
     
     default void init() {
         Spatial level = Managers.getInstance().getAsseManager().loadModel(this.getPathToScene());
+        
+        //TODO
         CollisionShape collision = CollisionShapeFactory.createMeshShape(((Node) level).getChild(0));
         RigidBodyControl control = new RigidBodyControl(collision, 0);
         Managers.getInstance().getBulletAppState().getPhysicsSpace().add(control);

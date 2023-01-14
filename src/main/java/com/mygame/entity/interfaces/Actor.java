@@ -40,10 +40,8 @@ public interface Actor {
             } else if (this.getControl().getWalkDirection().equals(Vector3f.ZERO)) {
                 this.setState(EnumActorState.STAND_STILL);
             }
-//            System.out.println("onGround ? : " + this.getControl().onGround());
         } else {
             this.setState(EnumActorState.IN_AIR);
-//            System.out.println("in air ? : ");
         }
     }
 }
