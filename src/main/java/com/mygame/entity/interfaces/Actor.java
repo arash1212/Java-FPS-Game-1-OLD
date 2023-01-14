@@ -4,6 +4,7 @@
  */
 package com.mygame.entity.interfaces;
 
+import com.jme3.bullet.control.CharacterControl;
 import com.jme3.math.Vector3f;
 
 /**
@@ -11,7 +12,30 @@ import com.jme3.math.Vector3f;
  * @author Arash
  */
 public interface Actor {
+
     void spawn(Vector3f spawnPoint);
-    
+
     void update();
+
+    default boolean canJump() {
+        return this.getState() != EnumActorState.IN_AIR;
+    }
+
+    EnumActorState getState();
+
+    void setState(EnumActorState state);
+
+    CharacterControl getControl();
+
+    default void updateActorState() {
+        if (this.getControl().onGround()) {
+            if (!this.getControl().getWalkDirection().equals(Vector3f.ZERO)) {
+                this.setState(EnumActorState.WALKING);
+            } else if (this.getControl().getWalkDirection().equals(Vector3f.ZERO)) {
+                this.setState(EnumActorState.STAND_STILL);
+            }
+        } else {
+            this.setState(EnumActorState.IN_AIR);
+        }
+    }
 }
