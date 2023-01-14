@@ -10,11 +10,16 @@ import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
 import com.jme3.bullet.control.CharacterControl;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
+import com.jme3.scene.CameraNode;
 import com.jme3.scene.Node;
 import com.mygame.entity.interfaces.Actor;
 import com.mygame.entity.interfaces.EnumActorState;
+import com.mygame.entity.interfaces.Weapon;
+import com.mygame.entity.weapons.pistol.PistolMakarove;
 import com.mygame.settings.Managers;
 import com.mygame.settings.input.InputState;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -24,14 +29,19 @@ public class Player extends Node implements Actor {
 
     //constants
     private static final float MOVEMENT_SPEED = 6;
+    private static final float RUN_SPEED = 3;
     private static final float GRAVITY_SPEED = 20;
     private static final float JUMP_SPEED = 10;
+
+    private float currentSpeed = 6;
 
     //Managers
     private final InputState inputState;
     private final AssetManager assetManager;
     private final Camera cam;
     private final BulletAppState bulletAppSate;
+    private final Node rootNode;
+    private final CameraNode cameraNode;
 
     //actor specifics
     private CharacterControl control;
@@ -42,11 +52,17 @@ public class Player extends Node implements Actor {
     private final Vector3f walkDirection = new Vector3f();
     private EnumActorState state = EnumActorState.STAND_STILL;
 
+    //Weapons
+    private List<Weapon> weapons = new ArrayList(3);
+    private Weapon selectedWeapon;
+
     public Player() {
         this.inputState = InputState.getInstance();
         this.assetManager = Managers.getInstance().getAsseManager();
         this.cam = Managers.getInstance().getCam();
         this.bulletAppSate = Managers.getInstance().getBulletAppState();
+        this.rootNode = Managers.getInstance().getRootNode();
+        this.cameraNode = Managers.getInstance().getCameraNode();
     }
 
     private void init() {
@@ -56,6 +72,9 @@ public class Player extends Node implements Actor {
 
         control.setGravity(GRAVITY_SPEED);
         control.setJumpSpeed(JUMP_SPEED);
+
+        //rootNode.attachChild(cameraNode);
+        rootNode.attachChild(this);
     }
 
     @Override
@@ -63,6 +82,8 @@ public class Player extends Node implements Actor {
         this.init();
 
         this.control.setPhysicsLocation(spawnPoint);
+
+        initWeapons();
     }
 
     @Override
@@ -71,9 +92,26 @@ public class Player extends Node implements Actor {
         updateMovements();
 
         updateActorState();
+
+        if (selectedWeapon != null) {
+            selectedWeapon.updateAnimations(this.state);
+        }
+
+    }
+
+    private void setCurrentSpeed() {
+        if (this.state.equals(EnumActorState.WALKING) && currentSpeed < MOVEMENT_SPEED) {
+            currentSpeed += 0.05f;
+        } else if (this.state.equals(EnumActorState.RUNNING) && currentSpeed > RUN_SPEED) {
+            currentSpeed -= 0.3f;
+        } else if (this.state.equals(EnumActorState.STAND_STILL)) {
+            currentSpeed = MOVEMENT_SPEED;
+        }
     }
 
     private void updateMovements() {
+        setCurrentSpeed();
+
         this.camDir.set(cam.getDirection());
         this.camLeft.set(cam.getLeft());
 
@@ -88,6 +126,7 @@ public class Player extends Node implements Actor {
             this.walkDirection.addLocal(camDir);
         }
         if (inputState.isPressedBackward) {
+            //todo fix (backward run ?)
             this.walkDirection.addLocal(camDir.negate());
         }
         if (inputState.isPressedJump && this.canJump()) {
@@ -95,8 +134,16 @@ public class Player extends Node implements Actor {
         }
 
         this.walkDirection.y = 0;
-        this.control.setWalkDirection(this.walkDirection.divide(MOVEMENT_SPEED));
+        this.control.setWalkDirection(this.walkDirection.normalizeLocal().divide(currentSpeed));
         this.cam.setLocation(control.getPhysicsLocation());
+    }
+
+    //weapons
+    private void initWeapons() {
+        this.weapons.add(new PistolMakarove());
+
+        this.selectedWeapon = this.weapons.get(0);
+        selectedWeapon.select();
     }
 
     @Override
@@ -112,6 +159,11 @@ public class Player extends Node implements Actor {
     @Override
     public CharacterControl getControl() {
         return control;
+    }
+
+    @Override
+    public boolean isRunning() {
+        return !this.control.getWalkDirection().equals(Vector3f.ZERO) && inputState.isPressedRun;
     }
 
 }

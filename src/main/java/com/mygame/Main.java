@@ -3,6 +3,7 @@ package com.mygame;
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.renderer.RenderManager;
+import com.jme3.scene.CameraNode;
 import com.jme3.scene.Node;
 import com.mygame.levels.Level;
 import com.mygame.levels.Level1;
@@ -66,6 +67,9 @@ public class Main extends SimpleApplication {
         Managers.getInstance().setBulletAppState(this.bulletAppState);
         Managers.getInstance().setStateManager(this.stateManager);
         Managers.getInstance().setAppSettings(this.settings);
+        Managers.getInstance().setCameraNode(new CameraNode("cameraNode", this.cam));
+        rootNode.attachChild(Managers.getInstance().getCameraNode());
+        
     }
 
     private void initNodes() {

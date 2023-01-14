@@ -27,15 +27,22 @@ public interface Actor {
 
     CharacterControl getControl();
 
+    boolean isRunning();
+
     default void updateActorState() {
         if (this.getControl().onGround()) {
             if (!this.getControl().getWalkDirection().equals(Vector3f.ZERO)) {
-                this.setState(EnumActorState.WALKING);
+                if (!this.isRunning()) {
+                    this.setState(EnumActorState.WALKING);
+                } else {
+                    this.setState(EnumActorState.RUNNING);
+                }
             } else if (this.getControl().getWalkDirection().equals(Vector3f.ZERO)) {
                 this.setState(EnumActorState.STAND_STILL);
             }
-        } else {
+        } else if (this.getControl().onGround() == false) {
             this.setState(EnumActorState.IN_AIR);
+            System.out.println("in air ?");
         }
     }
 }

@@ -23,6 +23,7 @@ public class InputSettings {
     private static final String FORWARD = "forward";
     private static final String BACKWARD = "backward";
     private static final String JUMP = "jump";
+    private static final String RUN = "run";
 
     //
     private final InputManager inputManager;
@@ -33,13 +34,14 @@ public class InputSettings {
     }
 
     public void initInputs() {
-        this.inputManager.addMapping("left", new KeyTrigger(KeyInput.KEY_A));
-        this.inputManager.addMapping("right", new KeyTrigger(KeyInput.KEY_D));
-        this.inputManager.addMapping("forward", new KeyTrigger(KeyInput.KEY_W));
-        this.inputManager.addMapping("backward", new KeyTrigger(KeyInput.KEY_S));
-        this.inputManager.addMapping("jump", new KeyTrigger(KeyInput.KEY_SPACE));
+        this.inputManager.addMapping(LEFT, new KeyTrigger(KeyInput.KEY_A));
+        this.inputManager.addMapping(RIGHT, new KeyTrigger(KeyInput.KEY_D));
+        this.inputManager.addMapping(FORWARD, new KeyTrigger(KeyInput.KEY_W));
+        this.inputManager.addMapping(BACKWARD, new KeyTrigger(KeyInput.KEY_S));
+        this.inputManager.addMapping(JUMP, new KeyTrigger(KeyInput.KEY_SPACE));
+        this.inputManager.addMapping(RUN, new KeyTrigger(KeyInput.KEY_LSHIFT));
 
-        this.inputManager.addListener(actionListener, LEFT, RIGHT, FORWARD, BACKWARD, JUMP);
+        this.inputManager.addListener(actionListener, LEFT, RIGHT, FORWARD, BACKWARD, JUMP, RUN);
     }
 
     private final ActionListener actionListener = new ActionListener() {
@@ -59,6 +61,9 @@ public class InputSettings {
             }
             if (name.equals(JUMP)) {
                 inputState.isPressedJump = isPressed;
+            }
+            if (name.equals(RUN)) {
+                inputState.isPressedRun = isPressed;
             }
         }
     };
