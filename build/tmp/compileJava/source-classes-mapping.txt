@@ -1,2 +1,7 @@
 com/mygame/Main.java
  com.mygame.Main
+com/mygame/settings/input/InputSettings.java
+ com.mygame.settings.input.InputSettings
+ com.mygame.settings.input.InputSettings$1
+com/mygame/settings/input/InputState.java
+ com.mygame.settings.input.InputState
