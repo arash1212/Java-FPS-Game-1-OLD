@@ -67,7 +67,7 @@ public class Player extends Node implements Actor {
 
     private void init() {
         CapsuleCollisionShape capsule = new CapsuleCollisionShape(1.5f, 4f, 1);
-        control = new CharacterControl(capsule, 0.001f);
+        control = new CharacterControl(capsule, 0.01f);
         this.bulletAppSate.getPhysicsSpace().add(control);
 
         control.setGravity(GRAVITY_SPEED);
