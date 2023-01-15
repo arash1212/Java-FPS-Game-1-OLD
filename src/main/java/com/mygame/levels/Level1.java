@@ -40,6 +40,15 @@ public class Level1 implements Level {
     public void update() {
         for (Actor actor : actors) {
             actor.update();
+
+            if (actor.getHealth() <= 0) {
+                this.actors.remove(actor);
+            }
+
+            //Testing
+            if (actors.size() <= 1) {
+                this.spawnZombies();
+            }
         }
     }
 

@@ -58,6 +58,10 @@ public class Player extends Node implements Actor {
     private List<Weapon> weapons = new ArrayList(3);
     private Weapon selectedWeapon;
 
+    //Health
+    private float health = 100;
+    private Actor attacker;
+
     public Player() {
         this.inputState = InputState.getInstance();
         this.assetManager = Managers.getInstance().getAsseManager();
@@ -180,6 +184,21 @@ public class Player extends Node implements Actor {
                 this.inputState.isPressedFire = false;
             }
         }
+    }
+
+    @Override
+    public void takeDamage(float damage) {
+        this.health -= damage;
+    }
+
+    @Override
+    public void die() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public float getHealth() {
+        return this.health;
     }
 
 }

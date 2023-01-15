@@ -17,8 +17,10 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.CameraNode;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.mygame.entity.interfaces.Actor;
 import com.mygame.entity.interfaces.EnumActorState;
 import com.mygame.entity.interfaces.Weapon;
 import com.mygame.settings.Managers;
@@ -35,6 +37,7 @@ public class PistolMakarove implements Weapon {
     private static final String PATH_TO_FIRE_SOUND = "Models/weapons/pistols/makarove/sounds/Pistol_Makarove_Fire_Sound.wav";
     private static final Vector3f DEFAULT_POSITION = new Vector3f(0, -1.05f, 1);
     private static final Quaternion DEFAULT_ROTATIN = new Quaternion().fromAngles(0.0f, 39.15f, 0.08f);
+    private static final float DAMAGE = 25.f;
 
     //anim constants
     private static final String ANIM_ACTION_IDLE = "Idle";
@@ -46,6 +49,7 @@ public class PistolMakarove implements Weapon {
     private final AssetManager assetManager;
     private final InputState inputState;
     private final Camera cam;
+    private final Node shootables;
 
     //Sounds
     private AudioNode fireSound;
@@ -64,6 +68,7 @@ public class PistolMakarove implements Weapon {
         this.cameraNode = Managers.getInstance().getCameraNode();
         this.inputState = InputState.getInstance();
         this.cam = Managers.getInstance().getCam();
+        this.shootables = Managers.getInstance().getShooteables();
     }
 
     private void init() {
@@ -103,13 +108,31 @@ public class PistolMakarove implements Weapon {
 
     @Override
     public void update() {
-
+        System.out.println("size : " + this.shootables.getChildren().size());
     }
 
     @Override
     public void fire() {
         this.animComposer.setCurrentAction(ANIM_ACTION_FIRE_ONCE);
         this.fireSound.playInstance();
+
+        CollisionResults results = this.rayTo(this.cam.getLocation(), this.cam.getDirection(), shootables);
+
+        for (CollisionResult result : results) {
+            Spatial hitObject = result.getGeometry();
+            while (!(hitObject instanceof Actor)) {
+                if (hitObject.getParent() != null) {
+                    hitObject = hitObject.getParent();
+                } else {
+                    break;
+                }
+            }
+            if (hitObject instanceof Actor) {
+                ((Actor) hitObject).takeDamage(DAMAGE);
+                System.out.println("hit actor : apply damage");
+                break;
+            }
+        }
     }
 
     @Override

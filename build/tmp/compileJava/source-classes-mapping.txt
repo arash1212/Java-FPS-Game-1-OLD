@@ -1,7 +1,7 @@
 com/mygame/entity/interfaces/EnumActorState.java
  com.mygame.entity.interfaces.EnumActorState
-com/mygame/entity/interfaces/Weapon.java
- com.mygame.entity.interfaces.Weapon
+ExternalLibs/com/jme3/ai/navmesh/Heap.java
+ com.jme3.ai.navmesh.Heap
 com/mygame/settings/input/InputState.java
  com.mygame.settings.input.InputState
 ExternalLibs/com/jme3/ai/navmesh/Cell.java
@@ -10,12 +10,12 @@ ExternalLibs/com/jme3/ai/navmesh/Cell.java
  com.jme3.ai.navmesh.Cell$PathResult
 ExternalLibs/com/jme3/ai/navmesh/Node.java
  com.jme3.ai.navmesh.Node
-com/mygame/entity/interfaces/Actor.java
- com.mygame.entity.interfaces.Actor
+com/mygame/entity/interfaces/Weapon.java
+ com.mygame.entity.interfaces.Weapon
 ExternalLibs/com/jme3/ai/navmesh/util/Heap.java
  com.jme3.ai.navmesh.util.Heap
-com/mygame/settings/Managers.java
- com.mygame.settings.Managers
+ExternalLibs/com/jme3/ai/navmesh/util/MaxHeap.java
+ com.jme3.ai.navmesh.util.MaxHeap
 ExternalLibs/com/jme3/ai/navmesh/Plane.java
  com.jme3.ai.navmesh.Plane
 ExternalLibs/com/jme3/ai/navmesh/Path.java
@@ -52,10 +52,11 @@ ExternalLibs/com/jme3/ai/navmesh/NavMeshPathfinder.java
  com.jme3.ai.navmesh.NavMeshPathfinder$1
 ExternalLibs/com/jme3/ai/navmesh/DebugInfo.java
  com.jme3.ai.navmesh.DebugInfo
-com/mygame/Main.java
- com.mygame.Main
-com/mygame/entity/weapons/pistol/PistolMakarove.java
- com.mygame.entity.weapons.pistol.PistolMakarove
+com/mygame/entity/ai/zombie/ZombieNormal.java
+ com.mygame.entity.ai.zombie.ZombieNormal
+com/mygame/settings/input/InputSettings.java
+ com.mygame.settings.input.InputSettings
+ com.mygame.settings.input.InputSettings$1
 ExternalLibs/com/jme3/ai/navmesh/util/MinHeap.java
  com.jme3.ai.navmesh.util.MinHeap
 com/mygame/settings/GeneralConstants.java
@@ -70,20 +71,19 @@ ExternalLibs/com/jme3/ai/steering/behaviour/Seek.java
  com.jme3.ai.steering.behaviour.Seek
 ExternalLibs/com/jme3/ai/steering/behaviour/Separation.java
  com.jme3.ai.steering.behaviour.Separation
-ExternalLibs/com/jme3/ai/navmesh/Heap.java
- com.jme3.ai.navmesh.Heap
-com/mygame/settings/input/InputSettings.java
- com.mygame.settings.input.InputSettings
- com.mygame.settings.input.InputSettings$1
-ExternalLibs/com/jme3/ai/navmesh/util/MaxHeap.java
- com.jme3.ai.navmesh.util.MaxHeap
+com/mygame/Main.java
+ com.mygame.Main
+com/mygame/levels/Level.java
+ com.mygame.levels.Level
+com/mygame/entity/interfaces/Actor.java
+ com.mygame.entity.interfaces.Actor
+com/mygame/levels/Level1.java
+ com.mygame.levels.Level1
+com/mygame/settings/Managers.java
+ com.mygame.settings.Managers
 com/mygame/entity/interfaces/AIControllable.java
  com.mygame.entity.interfaces.AIControllable
 com/mygame/entity/player/Player.java
  com.mygame.entity.player.Player
-com/mygame/levels/Level.java
- com.mygame.levels.Level
-com/mygame/levels/Level1.java
- com.mygame.levels.Level1
-com/mygame/entity/ai/zombie/ZombieNormal.java
- com.mygame.entity.ai.zombie.ZombieNormal
+com/mygame/entity/weapons/pistol/PistolMakarove.java
+ com.mygame.entity.weapons.pistol.PistolMakarove

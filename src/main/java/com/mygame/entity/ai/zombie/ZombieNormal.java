@@ -18,6 +18,7 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import com.mygame.entity.interfaces.AIControllable;
+import com.mygame.entity.interfaces.Actor;
 import com.mygame.entity.interfaces.EnumActorState;
 import com.mygame.settings.GeneralConstants;
 import com.mygame.settings.Managers;
@@ -30,6 +31,10 @@ public class ZombieNormal extends Node implements AIControllable {
 
     //constants
     private static final float HEIGHT = 1.8f;
+
+    //Health
+    private float health = 100;
+    private Actor attacker;
 
     //Managers
     private final AssetManager assetManager;
@@ -83,6 +88,8 @@ public class ZombieNormal extends Node implements AIControllable {
             this.initNavMesh();
             this.targetPosition.set(Managers.getInstance().getPlayer().getPosition());
         }
+
+        this.die();
     }
 
     @Override
@@ -135,6 +142,24 @@ public class ZombieNormal extends Node implements AIControllable {
     @Override
     public void setTargetPosition(Vector3f pos) {
         this.targetPosition.set(pos);
+    }
+
+    @Override
+    public void takeDamage(float damage) {
+        this.health -= damage;
+    }
+
+    @Override
+    public void die() {
+        if (this.health <= 0) {
+            this.bullAppState.getPhysicsSpace().remove(this.control);
+            this.shootables.detachChild(this);
+        }
+    }
+
+    @Override
+    public float getHealth() {
+        return this.health;
     }
 
 }

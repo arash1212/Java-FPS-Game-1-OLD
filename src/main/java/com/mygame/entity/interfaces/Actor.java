@@ -48,4 +48,10 @@ public interface Actor {
     default Vector3f getPosition() {
         return this.getControl().getPhysicsLocation();
     }
+
+    void takeDamage(float damage);
+
+    void die();
+
+    float getHealth();
 }

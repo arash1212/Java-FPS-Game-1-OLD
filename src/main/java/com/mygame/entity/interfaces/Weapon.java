@@ -28,7 +28,7 @@ public interface Weapon {
     default CollisionResults rayTo(Vector3f origin, Vector3f direction, Node node) {
         Ray ray = new Ray(origin, direction);
         CollisionResults results = new CollisionResults();
-        ray.collideWith(node, results);
+        node.collideWith(ray, results);
         return results;
     }
 }
