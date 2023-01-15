@@ -11,40 +11,40 @@ import com.mygame.settings.Managers;
 import com.mygame.settings.input.InputSettings;
 
 public class Main extends SimpleApplication {
-
+    
     private BulletAppState bulletAppState = new BulletAppState();
     private final Node shootables = new Node();
     private InputSettings inputSettings;
-
+    
     private Level level;
-
+    
     public static void main(String[] args) {
         Main app = new Main();
         app.start();
     }
-
+    
     @Override
     public void simpleInitApp() {
         this.stateManager.attach(bulletAppState);
         bulletAppState.setDebugEnabled(true);
-
+        
         initManagers();
-
+        
         initNodes();
-
+        
         initInputSettings();
-
+        
         loadLevel();
     }
-
+    
     @Override
     public void simpleUpdate(float tpf) {
-
+        
         if (level != null) {
             level.update();
         }
     }
-
+    
     @Override
     public void simpleRender(RenderManager rm) {
         //TODO: add render code
@@ -54,6 +54,8 @@ public class Main extends SimpleApplication {
     private void loadLevel() {
         this.level = new Level1();
         level.load();
+        
+        Managers.getInstance().setCurrentlyLoadedLevel(level);
     }
 
     //inits
@@ -71,11 +73,11 @@ public class Main extends SimpleApplication {
         rootNode.attachChild(Managers.getInstance().getCameraNode());
         
     }
-
+    
     private void initNodes() {
         rootNode.attachChild(shootables);
     }
-
+    
     private void initInputSettings() {
         this.inputSettings = new InputSettings();
         inputSettings.initInputs();

@@ -44,4 +44,8 @@ public interface Actor {
             this.setState(EnumActorState.IN_AIR);
         }
     }
+
+    default Vector3f getPosition() {
+        return this.getControl().getPhysicsLocation();
+    }
 }

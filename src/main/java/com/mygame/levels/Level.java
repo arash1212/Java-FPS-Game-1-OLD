@@ -22,6 +22,8 @@ import java.util.List;
  */
 public interface Level {
     
+    String getPath();
+    
     void load();
     
     void update();
@@ -34,7 +36,7 @@ public interface Level {
     
     default void init() {
         Spatial level = Managers.getInstance().getAsseManager().loadModel(this.getPathToScene());
-        
+
         //TODO
         CollisionShape collision = CollisionShapeFactory.createMeshShape(((Node) level).getChild(0));
         RigidBodyControl control = new RigidBodyControl(collision, 0);
@@ -49,5 +51,7 @@ public interface Level {
         Player player = new Player();
         player.spawn(this.getPlayerSpawnPoint());
         this.getActors().add(player);
+        
+        Managers.getInstance().setPlayer(player);
     }
 }

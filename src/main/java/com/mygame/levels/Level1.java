@@ -5,7 +5,10 @@
 package com.mygame.levels;
 
 import com.jme3.math.Vector3f;
+import com.mygame.entity.ai.zombie.ZombieNormal;
+import com.mygame.entity.interfaces.AIControllable;
 import com.mygame.entity.interfaces.Actor;
+import com.mygame.settings.Managers;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,8 @@ public class Level1 implements Level {
         this.init();
 
         this.spawnPlayer();
+
+        this.spawnZombies();
     }
 
     @Override
@@ -51,6 +56,18 @@ public class Level1 implements Level {
     @Override
     public Vector3f getPlayerSpawnPoint() {
         return Level1.PLAYER_SPAWN_POINT;
+    }
+
+    private void spawnZombies() {
+        ZombieNormal testZombie = new ZombieNormal();
+        testZombie.spawn(new Vector3f(0, 0, 5));
+        testZombie.setTargetPosition(Managers.getInstance().getPlayer().getPosition());
+        this.actors.add(testZombie);
+    }
+
+    @Override
+    public String getPath() {
+        return Level1.PATH_TO_SCENE;
     }
 
 }

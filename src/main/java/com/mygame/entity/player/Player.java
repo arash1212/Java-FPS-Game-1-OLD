@@ -32,6 +32,7 @@ public class Player extends Node implements Actor {
     private static final float RUN_SPEED = 3;
     private static final float GRAVITY_SPEED = 20;
     private static final float JUMP_SPEED = 10;
+    private static final float HEIGHT = 1.8f;
 
     private float currentSpeed = 6;
 
@@ -51,6 +52,7 @@ public class Player extends Node implements Actor {
     private final Vector3f camLeft = new Vector3f();
     private final Vector3f walkDirection = new Vector3f();
     private EnumActorState state = EnumActorState.STAND_STILL;
+    private Vector3f camPosition = new Vector3f(0, 0, 0);
 
     //Weapons
     private List<Weapon> weapons = new ArrayList(3);
@@ -66,7 +68,7 @@ public class Player extends Node implements Actor {
     }
 
     private void init() {
-        CapsuleCollisionShape capsule = new CapsuleCollisionShape(1.5f, 4f, 1);
+        CapsuleCollisionShape capsule = new CapsuleCollisionShape(1.3f, HEIGHT, 1);
         control = new CharacterControl(capsule, 0.01f);
         this.bulletAppSate.getPhysicsSpace().add(control);
 
@@ -113,6 +115,7 @@ public class Player extends Node implements Actor {
     private void updateMovements() {
         setCurrentSpeed();
 
+        this.camPosition.set(this.getPosition().x, this.getPosition().y + HEIGHT, this.getPosition().z);
         this.camDir.set(cam.getDirection());
         this.camLeft.set(cam.getLeft());
 
@@ -136,7 +139,7 @@ public class Player extends Node implements Actor {
 
         this.walkDirection.y = 0;
         this.control.setWalkDirection(this.walkDirection.normalizeLocal().divide(currentSpeed));
-        this.cam.setLocation(control.getPhysicsLocation());
+        this.cam.setLocation(this.camPosition);
     }
 
     //weapons

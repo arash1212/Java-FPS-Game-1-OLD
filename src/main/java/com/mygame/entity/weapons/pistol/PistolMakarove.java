@@ -11,8 +11,11 @@ import com.jme3.anim.tween.action.Action;
 import com.jme3.asset.AssetManager;
 import com.jme3.audio.AudioData.DataType;
 import com.jme3.audio.AudioNode;
+import com.jme3.collision.CollisionResult;
+import com.jme3.collision.CollisionResults;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.Camera;
 import com.jme3.scene.CameraNode;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -42,6 +45,7 @@ public class PistolMakarove implements Weapon {
 
     private final AssetManager assetManager;
     private final InputState inputState;
+    private final Camera cam;
 
     //Sounds
     private AudioNode fireSound;
@@ -49,6 +53,7 @@ public class PistolMakarove implements Weapon {
     //animation
     private AnimComposer animComposer;
     private EnumActorState currentState = EnumActorState.STAND_STILL;
+
     //Actions
     private Action fireOnce;
 
@@ -58,6 +63,7 @@ public class PistolMakarove implements Weapon {
         this.assetManager = Managers.getInstance().getAsseManager();
         this.cameraNode = Managers.getInstance().getCameraNode();
         this.inputState = InputState.getInstance();
+        this.cam = Managers.getInstance().getCam();
     }
 
     private void init() {

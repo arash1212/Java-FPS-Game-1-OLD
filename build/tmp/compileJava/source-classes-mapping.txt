@@ -1,25 +1,89 @@
-com/mygame/settings/input/InputSettings.java
- com.mygame.settings.input.InputSettings
- com.mygame.settings.input.InputSettings$1
+com/mygame/entity/interfaces/EnumActorState.java
+ com.mygame.entity.interfaces.EnumActorState
 com/mygame/entity/interfaces/Weapon.java
  com.mygame.entity.interfaces.Weapon
 com/mygame/settings/input/InputState.java
  com.mygame.settings.input.InputState
-com/mygame/levels/Level1.java
- com.mygame.levels.Level1
-com/mygame/entity/interfaces/EnumActorState.java
- com.mygame.entity.interfaces.EnumActorState
+ExternalLibs/com/jme3/ai/navmesh/Cell.java
+ com.jme3.ai.navmesh.Cell
+ com.jme3.ai.navmesh.Cell$ClassifyResult
+ com.jme3.ai.navmesh.Cell$PathResult
+ExternalLibs/com/jme3/ai/navmesh/Node.java
+ com.jme3.ai.navmesh.Node
 com/mygame/entity/interfaces/Actor.java
  com.mygame.entity.interfaces.Actor
-com/mygame/Main.java
- com.mygame.Main
-com/mygame/levels/Level.java
- com.mygame.levels.Level
+ExternalLibs/com/jme3/ai/navmesh/util/Heap.java
+ com.jme3.ai.navmesh.util.Heap
 com/mygame/settings/Managers.java
  com.mygame.settings.Managers
+ExternalLibs/com/jme3/ai/navmesh/Plane.java
+ com.jme3.ai.navmesh.Plane
+ExternalLibs/com/jme3/ai/navmesh/Path.java
+ com.jme3.ai.navmesh.Path
+ com.jme3.ai.navmesh.Path$Waypoint
+ExternalLibs/com/jme3/ai/steering/behaviour/Flee.java
+ com.jme3.ai.steering.behaviour.Flee
+ExternalLibs/com/jme3/ai/steering/behaviour/Evade.java
+ com.jme3.ai.steering.behaviour.Evade
+ExternalLibs/com/jme3/ai/steering/Obstacle.java
+ com.jme3.ai.steering.Obstacle
+ExternalLibs/com/jme3/ai/steering/TestSteering.java
+ com.jme3.ai.steering.TestSteering
+ com.jme3.ai.steering.TestSteering$EvadeControl
+ com.jme3.ai.steering.TestSteering$FleeControl
+ com.jme3.ai.steering.TestSteering$MoveStraightControl
+ com.jme3.ai.steering.TestSteering$PersuitAndAvoidControl
+ com.jme3.ai.steering.TestSteering$PersuitAvoidSeparationControl
+ com.jme3.ai.steering.TestSteering$PersuitControl
+ com.jme3.ai.steering.TestSteering$PersuitSeparationControl
+ com.jme3.ai.steering.TestSteering$SeekControl
+ com.jme3.ai.steering.TestSteering$SimpleControl
+ com.jme3.ai.steering.TestSteering$Vehicle
+ExternalLibs/com/jme3/ai/steering/utilities/SimpleObstacle.java
+ com.jme3.ai.steering.utilities.SimpleObstacle
+ExternalLibs/com/jme3/ai/navmesh/Line2D.java
+ com.jme3.ai.navmesh.Line2D
+ com.jme3.ai.navmesh.Line2D$LineIntersect
+ com.jme3.ai.navmesh.Line2D$PointSide
+ExternalLibs/com/jme3/ai/navmesh/NavMesh.java
+ com.jme3.ai.navmesh.NavMesh
+ExternalLibs/com/jme3/ai/navmesh/NavMeshPathfinder.java
+ com.jme3.ai.navmesh.NavMeshPathfinder
+ com.jme3.ai.navmesh.NavMeshPathfinder$1
+ExternalLibs/com/jme3/ai/navmesh/DebugInfo.java
+ com.jme3.ai.navmesh.DebugInfo
+com/mygame/Main.java
+ com.mygame.Main
+com/mygame/entity/weapons/pistol/PistolMakarove.java
+ com.mygame.entity.weapons.pistol.PistolMakarove
+ExternalLibs/com/jme3/ai/navmesh/util/MinHeap.java
+ com.jme3.ai.navmesh.util.MinHeap
+com/mygame/settings/GeneralConstants.java
+ com.mygame.settings.GeneralConstants
+ExternalLibs/com/jme3/ai/steering/behaviour/Persuit.java
+ com.jme3.ai.steering.behaviour.Persuit
+ExternalLibs/com/jme3/ai/steering/behaviour/Behaviour.java
+ com.jme3.ai.steering.behaviour.Behaviour
+ExternalLibs/com/jme3/ai/steering/behaviour/ObstacleAvoid.java
+ com.jme3.ai.steering.behaviour.ObstacleAvoid
+ExternalLibs/com/jme3/ai/steering/behaviour/Seek.java
+ com.jme3.ai.steering.behaviour.Seek
+ExternalLibs/com/jme3/ai/steering/behaviour/Separation.java
+ com.jme3.ai.steering.behaviour.Separation
+ExternalLibs/com/jme3/ai/navmesh/Heap.java
+ com.jme3.ai.navmesh.Heap
+com/mygame/settings/input/InputSettings.java
+ com.mygame.settings.input.InputSettings
+ com.mygame.settings.input.InputSettings$1
+ExternalLibs/com/jme3/ai/navmesh/util/MaxHeap.java
+ com.jme3.ai.navmesh.util.MaxHeap
 com/mygame/entity/interfaces/AIControllable.java
  com.mygame.entity.interfaces.AIControllable
 com/mygame/entity/player/Player.java
  com.mygame.entity.player.Player
-com/mygame/entity/weapons/pistol/PistolMakarove.java
- com.mygame.entity.weapons.pistol.PistolMakarove
+com/mygame/levels/Level.java
+ com.mygame.levels.Level
+com/mygame/levels/Level1.java
+ com.mygame.levels.Level1
+com/mygame/entity/ai/zombie/ZombieNormal.java
+ com.mygame.entity.ai.zombie.ZombieNormal
