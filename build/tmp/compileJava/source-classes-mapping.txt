@@ -1,25 +1,25 @@
-com/mygame/entity/interfaces/EnumActorState.java
- com.mygame.entity.interfaces.EnumActorState
-com/mygame/entity/interfaces/Weapon.java
- com.mygame.entity.interfaces.Weapon
-com/mygame/entity/interfaces/AIControllable.java
- com.mygame.entity.interfaces.AIControllable
-com/mygame/settings/Managers.java
- com.mygame.settings.Managers
 com/mygame/settings/input/InputSettings.java
  com.mygame.settings.input.InputSettings
  com.mygame.settings.input.InputSettings$1
+com/mygame/entity/interfaces/Weapon.java
+ com.mygame.entity.interfaces.Weapon
 com/mygame/settings/input/InputState.java
  com.mygame.settings.input.InputState
-com/mygame/entity/weapons/pistol/PistolMakarove.java
- com.mygame.entity.weapons.pistol.PistolMakarove
 com/mygame/levels/Level1.java
  com.mygame.levels.Level1
+com/mygame/entity/interfaces/EnumActorState.java
+ com.mygame.entity.interfaces.EnumActorState
 com/mygame/entity/interfaces/Actor.java
  com.mygame.entity.interfaces.Actor
 com/mygame/Main.java
  com.mygame.Main
-com/mygame/entity/player/Player.java
- com.mygame.entity.player.Player
 com/mygame/levels/Level.java
  com.mygame.levels.Level
+com/mygame/settings/Managers.java
+ com.mygame.settings.Managers
+com/mygame/entity/interfaces/AIControllable.java
+ com.mygame.entity.interfaces.AIControllable
+com/mygame/entity/player/Player.java
+ com.mygame.entity.player.Player
+com/mygame/entity/weapons/pistol/PistolMakarove.java
+ com.mygame.entity.weapons.pistol.PistolMakarove

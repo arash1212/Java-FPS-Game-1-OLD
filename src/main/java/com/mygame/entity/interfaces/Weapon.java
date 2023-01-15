@@ -9,10 +9,14 @@ package com.mygame.entity.interfaces;
  * @author Arash
  */
 public interface Weapon {
-    
+
     void select();
-    
+
     void updateAnimations(EnumActorState state);
-    
+
     void update();
+
+    void fire();
+
+    boolean isSingleShot();
 }

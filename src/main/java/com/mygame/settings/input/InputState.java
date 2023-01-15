@@ -18,6 +18,9 @@ public class InputState {
     //Movement
     public boolean isPressedLeft, isPressedRight, isPressedForward, isPressedBackward, isPressedJump, isPressedRun;
 
+    //Weapons
+    public boolean isPressedFire;
+
     public static InputState getInstance() {
         return instance;
     }

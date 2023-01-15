@@ -6,8 +6,10 @@ package com.mygame.settings.input;
 
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
+import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
+import com.jme3.input.controls.MouseButtonTrigger;
 import com.mygame.settings.Managers;
 import java.util.Arrays;
 
@@ -24,6 +26,7 @@ public class InputSettings {
     private static final String BACKWARD = "backward";
     private static final String JUMP = "jump";
     private static final String RUN = "run";
+    private static final String FIRE = "fire";
 
     //
     private final InputManager inputManager;
@@ -40,8 +43,9 @@ public class InputSettings {
         this.inputManager.addMapping(BACKWARD, new KeyTrigger(KeyInput.KEY_S));
         this.inputManager.addMapping(JUMP, new KeyTrigger(KeyInput.KEY_SPACE));
         this.inputManager.addMapping(RUN, new KeyTrigger(KeyInput.KEY_LSHIFT));
+        this.inputManager.addMapping(FIRE, new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
 
-        this.inputManager.addListener(actionListener, LEFT, RIGHT, FORWARD, BACKWARD, JUMP, RUN);
+        this.inputManager.addListener(actionListener, LEFT, RIGHT, FORWARD, BACKWARD, JUMP, RUN, FIRE);
     }
 
     private final ActionListener actionListener = new ActionListener() {
@@ -64,6 +68,9 @@ public class InputSettings {
             }
             if (name.equals(RUN)) {
                 inputState.isPressedRun = isPressed;
+            }
+            if (name.equals(FIRE)) {
+                inputState.isPressedFire = isPressed;
             }
         }
     };

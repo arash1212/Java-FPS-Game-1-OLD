@@ -97,6 +97,7 @@ public class Player extends Node implements Actor {
             selectedWeapon.updateAnimations(this.state);
         }
 
+        this.fire();
     }
 
     private void setCurrentSpeed() {
@@ -165,7 +166,17 @@ public class Player extends Node implements Actor {
     public boolean isRunning() {
         return !this.control.getWalkDirection().equals(Vector3f.ZERO)
                 && !this.inputState.isPressedBackward
+                && this.inputState.isPressedForward
                 && inputState.isPressedRun;
+    }
+
+    private void fire() {
+        if (this.inputState.isPressedFire) {
+            this.selectedWeapon.fire();
+            if (this.selectedWeapon.isSingleShot()) {
+                this.inputState.isPressedFire = false;
+            }
+        }
     }
 
 }
