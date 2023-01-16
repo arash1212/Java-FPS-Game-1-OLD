@@ -36,7 +36,7 @@ public class PistolMakarove implements Weapon {
     private static final String PATH_TO_MODEL = "Models/weapons/pistols/makarove/pistol_makarove.j3o";
     private static final String PATH_TO_FIRE_SOUND = "Models/weapons/pistols/makarove/sounds/Pistol_Makarove_Fire_Sound.wav";
     private static final Vector3f DEFAULT_POSITION = new Vector3f(0, -1.05f, 1);
-    private static final Quaternion DEFAULT_ROTATIN = new Quaternion().fromAngles(0.0f, 39.15f, 0.08f);
+    private static final Quaternion DEFAULT_ROTATIN = new Quaternion().fromAngles(0.0f, 39.11f, 0.08f);
     private static final float DAMAGE = 25.f;
 
     //anim constants
@@ -150,7 +150,7 @@ public class PistolMakarove implements Weapon {
         }
 
         fireOnce = this.animComposer.actionSequence(ANIM_ACTION_FIRE_ONCE, fireAction, doneTween);
-        fireOnce.setSpeed(1.3f);
+        fireOnce.setSpeed(1.0f);
     }
 
 }
