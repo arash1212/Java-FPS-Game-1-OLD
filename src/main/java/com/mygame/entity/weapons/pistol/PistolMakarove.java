@@ -35,9 +35,13 @@ public class PistolMakarove implements Weapon {
     //constants
     private static final String PATH_TO_MODEL = "Models/weapons/pistols/makarove/pistol_makarove.j3o";
     private static final String PATH_TO_FIRE_SOUND = "Models/weapons/pistols/makarove/sounds/Pistol_Makarove_Fire_Sound.wav";
-    private static final Vector3f DEFAULT_POSITION = new Vector3f(0, -1.05f, 1);
-    private static final Quaternion DEFAULT_ROTATIN = new Quaternion().fromAngles(0.0f, 39.11f, 0.08f);
     private static final float DAMAGE = 25.f;
+    private static final Vector3f DEFAULT_POSITION = new Vector3f(0, -0.95f, 0.61f);
+    private static final Quaternion DEFAULT_ROTATIN = new Quaternion().fromAngles(0.0f, 39.11f, 0.08f);
+    private static final Vector3f AIM_POSITION = new Vector3f(0.2f, -0.807f, 0.67f);
+    private static final Quaternion AIM_ROTATIN = new Quaternion().fromAngles(0.0f, 39.096f, -0.00f);
+
+    private boolean isAiming = false;
 
     //anim constants
     private static final String ANIM_ACTION_IDLE = "Idle";
@@ -55,6 +59,7 @@ public class PistolMakarove implements Weapon {
     private AudioNode fireSound;
 
     //animation
+    private Spatial model;
     private AnimComposer animComposer;
     private EnumActorState currentState = EnumActorState.STAND_STILL;
 
@@ -62,6 +67,10 @@ public class PistolMakarove implements Weapon {
     private Action fireOnce;
 
     private final CameraNode cameraNode;
+
+    //Recoil
+    private float recoilAmount = 0.f;
+    private Quaternion currentCamRotation;
 
     public PistolMakarove() {
         this.assetManager = Managers.getInstance().getAsseManager();
@@ -72,7 +81,7 @@ public class PistolMakarove implements Weapon {
     }
 
     private void init() {
-        Spatial model = this.assetManager.loadModel(PATH_TO_MODEL);
+        model = this.assetManager.loadModel(PATH_TO_MODEL);
         this.animComposer = ((Node) model).getChild("Armature").getControl(AnimComposer.class);
         model.setLocalTranslation(DEFAULT_POSITION);
         model.setLocalRotation(DEFAULT_ROTATIN);
@@ -107,8 +116,11 @@ public class PistolMakarove implements Weapon {
     }
 
     @Override
-    public void update() {
-        System.out.println("size : " + this.shootables.getChildren().size());
+    public void update(float tpf) {
+
+        this.updatePosition(tpf);
+
+        this.recoil(tpf);
     }
 
     @Override
@@ -129,10 +141,11 @@ public class PistolMakarove implements Weapon {
             }
             if (hitObject instanceof Actor) {
                 ((Actor) hitObject).takeDamage(DAMAGE);
-                System.out.println("hit actor : apply damage");
                 break;
             }
         }
+
+        this.recoilAmount += 1;
     }
 
     @Override
@@ -151,6 +164,31 @@ public class PistolMakarove implements Weapon {
 
         fireOnce = this.animComposer.actionSequence(ANIM_ACTION_FIRE_ONCE, fireAction, doneTween);
         fireOnce.setSpeed(1.0f);
+    }
+
+    //aim/default
+    private void updatePosition(float tpf) {
+        if (this.isAiming) {
+            model.getLocalTranslation().interpolateLocal(AIM_POSITION, tpf * 12);
+            model.setLocalRotation(AIM_ROTATIN);
+        } else {
+            model.getLocalTranslation().interpolateLocal(DEFAULT_POSITION, tpf * 12);
+            model.setLocalRotation(DEFAULT_ROTATIN);
+        }
+    }
+
+    @Override
+    public void setIsAiming(boolean isAiming) {
+        this.isAiming = isAiming;
+    }
+
+    //TODO : fix beshe
+    private void recoil(float tpf) {
+        if (recoilAmount > 0) {
+           // Vector3f newDir = new Vector3f(this.cam.getDirection().x, this.cam.getDirection().y + 0.003f, this.cam.getDirection().z);
+           // this.cam.lookAtDirection(new Vector3f().interpolateLocal(this.cam.getDirection(), newDir, 0.6f * tpf * 30), cam.getUp());
+            recoilAmount -= tpf;
+        }
     }
 
 }

@@ -12,6 +12,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.CameraNode;
 import com.jme3.scene.Node;
+import com.jme3.scene.control.CameraControl;
 import com.mygame.entity.interfaces.Actor;
 import com.mygame.entity.interfaces.EnumActorState;
 import com.mygame.entity.interfaces.Weapon;
@@ -35,6 +36,7 @@ public class Player extends Node implements Actor {
     private static final float HEIGHT = 1.8f;
 
     private float currentSpeed = 6;
+    private float currentFov = 50f;
 
     //Managers
     private final InputState inputState;
@@ -53,6 +55,7 @@ public class Player extends Node implements Actor {
     private final Vector3f walkDirection = new Vector3f();
     private EnumActorState state = EnumActorState.STAND_STILL;
     private Vector3f camPosition = new Vector3f(0, 0, 0);
+    private final float mouseSensitivity = 0.001f;
 
     //Weapons
     private List<Weapon> weapons = new ArrayList(3);
@@ -80,7 +83,10 @@ public class Player extends Node implements Actor {
         control.setJumpSpeed(JUMP_SPEED);
 
         //rootNode.attachChild(cameraNode);
+        this.attachChild(this.cameraNode);
         rootNode.attachChild(this);
+
+        //this.addControl(control);
     }
 
     @Override
@@ -93,17 +99,23 @@ public class Player extends Node implements Actor {
     }
 
     @Override
-    public void update() {
+    public void update(float tpf) {
 
+        this.cam.setFov(currentFov);
+
+        // updateCamera();
         updateMovements();
 
         updateActorState();
 
         if (selectedWeapon != null) {
+            selectedWeapon.update(tpf);
             selectedWeapon.updateAnimations(this.state);
         }
 
         this.fire();
+
+        this.aim(tpf);
     }
 
     private void setCurrentSpeed() {
@@ -116,10 +128,31 @@ public class Player extends Node implements Actor {
         }
     }
 
+    private void updateCamera() {
+        //lock cursor inside window
+        Managers.getInstance().getInputManager().setCursorVisible(false);
+        //camPosition
+        this.camPosition.set(this.getPosition().x, this.getPosition().y + HEIGHT, this.getPosition().z);
+        // this.cam.setLocation(this.camPosition);
+
+        if (inputState.mouseDeltaXY == null) {
+            return;
+        }
+
+        if (inputState.mouseDeltaXY.y != 0.0f) {
+            this.cameraNode.rotate(-inputState.mouseDeltaXY.y * mouseSensitivity, 0, 0);
+        }
+        if (inputState.mouseDeltaXY.x != 0.0f) {
+            this.rotate(0, -inputState.mouseDeltaXY.x * mouseSensitivity, 0);
+        }
+
+    }
+
     private void updateMovements() {
         setCurrentSpeed();
 
         this.camPosition.set(this.getPosition().x, this.getPosition().y + HEIGHT, this.getPosition().z);
+
         this.camDir.set(cam.getDirection());
         this.camLeft.set(cam.getLeft());
 
@@ -174,7 +207,8 @@ public class Player extends Node implements Actor {
         return !this.control.getWalkDirection().equals(Vector3f.ZERO)
                 && !this.inputState.isPressedBackward
                 && this.inputState.isPressedForward
-                && inputState.isPressedRun;
+                && inputState.isPressedRun
+                && !inputState.isPressedAim;
     }
 
     private void fire() {
@@ -182,6 +216,22 @@ public class Player extends Node implements Actor {
             this.selectedWeapon.fire();
             if (this.selectedWeapon.isSingleShot()) {
                 this.inputState.isPressedFire = false;
+            }
+        }
+    }
+
+    private void aim(float tpf) {
+        if (this.selectedWeapon != null) {
+            if (this.inputState.isPressedAim) {
+                if (this.currentFov > 40) {
+                    this.currentFov -= 40.4f * tpf;
+                }
+                this.selectedWeapon.setIsAiming(true);
+            } else {
+                if (this.currentFov < 50) {
+                    this.currentFov += 40.4f * tpf;
+                }
+                this.selectedWeapon.setIsAiming(false);
             }
         }
     }

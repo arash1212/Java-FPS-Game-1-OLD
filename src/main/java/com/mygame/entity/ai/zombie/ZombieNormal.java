@@ -80,7 +80,7 @@ public class ZombieNormal extends Node implements AIControllable {
     }
 
     @Override
-    public void update() {
+    public void update(float tpf) {
 
         this.navigateTo(Managers.getInstance().getPlayer().getPosition());
 

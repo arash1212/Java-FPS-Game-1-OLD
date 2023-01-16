@@ -15,7 +15,7 @@ public interface Actor {
 
     void spawn(Vector3f spawnPoint);
 
-    void update();
+    void update(float tpf);
 
     default boolean canJump() {
         return this.getState() != EnumActorState.IN_AIR;

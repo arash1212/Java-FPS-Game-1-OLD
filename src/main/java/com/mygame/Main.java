@@ -25,6 +25,9 @@ public class Main extends SimpleApplication {
     
     @Override
     public void simpleInitApp() {
+       // flyCam.setEnabled(false);
+        cam.setFrustumNear(0.001f);
+        
         this.stateManager.attach(bulletAppState);
         bulletAppState.setDebugEnabled(true);
         
@@ -41,7 +44,7 @@ public class Main extends SimpleApplication {
     public void simpleUpdate(float tpf) {
         
         if (level != null) {
-            level.update();
+            level.update(tpf);
         }
     }
     

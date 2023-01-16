@@ -4,6 +4,8 @@
  */
 package com.mygame.settings.input;
 
+import com.jme3.math.Vector2f;
+
 /**
  *
  * @author Arash
@@ -15,11 +17,14 @@ public class InputState {
     private InputState() {
     }
 
+    //Mouse
+    public Vector2f mouseDeltaXY;
+
     //Movement
     public boolean isPressedLeft, isPressedRight, isPressedForward, isPressedBackward, isPressedJump, isPressedRun;
 
     //Weapons
-    public boolean isPressedFire;
+    public boolean isPressedFire, isPressedAim;
 
     public static InputState getInstance() {
         return instance;

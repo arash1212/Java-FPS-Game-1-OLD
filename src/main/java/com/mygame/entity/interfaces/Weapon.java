@@ -19,11 +19,13 @@ public interface Weapon {
 
     void updateAnimations(EnumActorState state);
 
-    void update();
+    void update(float tpf);
 
     void fire();
 
     boolean isSingleShot();
+
+    void setIsAiming(boolean isAiming);
 
     default CollisionResults rayTo(Vector3f origin, Vector3f direction, Node node) {
         Ray ray = new Ray(origin, direction);

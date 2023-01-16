@@ -37,9 +37,9 @@ public class Level1 implements Level {
     }
 
     @Override
-    public void update() {
+    public void update(float tpf) {
         for (Actor actor : actors) {
-            actor.update();
+            actor.update(tpf);
 
             if (actor.getHealth() <= 0) {
                 this.actors.remove(actor);

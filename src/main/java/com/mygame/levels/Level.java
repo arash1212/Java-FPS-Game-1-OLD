@@ -26,7 +26,7 @@ public interface Level {
     
     void load();
     
-    void update();
+    void update(float tpf);
     
     String getPathToScene();
     
