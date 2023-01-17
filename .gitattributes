@@ -1,0 +1,2 @@
+*.j3o filter=lfs diff=lfs merge=lfs -text
+assets.jar filter=lfs diff=lfs merge=lfs -text

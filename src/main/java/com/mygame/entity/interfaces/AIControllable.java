@@ -22,6 +22,15 @@ public interface AIControllable extends Actor {
 
     void setTargetPosition(Vector3f pos);
 
+    @Override
+    default void updateActorState() {
+        if (this.getPathfinder().getNextWaypoint() != null) {
+            this.setState(EnumActorState.WALKING);
+        } else {
+            this.setState(EnumActorState.STAND_STILL);
+        }
+    }
+
     default void navigateTo(Vector3f position) {
         if (this.getTargetPosition() != null) {
             if (this.getPathfinder() == null) {
@@ -42,7 +51,7 @@ public interface AIControllable extends Actor {
             }
 
             Vector3f wayPointDirection = waypoint.getPosition().subtract(this.getPosition());
-            this.getControl().setWalkDirection(wayPointDirection.normalize().divide(10));
+            this.getControl().setWalkDirection(wayPointDirection.normalize().divide(12));
 
             if (waypoint.getPosition().distance(this.getPosition()) < 4 && !this.getPathfinder().isAtGoalWaypoint()) {
                 this.getPathfinder().goToNextWaypoint();

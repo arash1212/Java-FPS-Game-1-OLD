@@ -37,9 +37,9 @@ public class PistolMakarove implements Weapon {
     private static final String PATH_TO_FIRE_SOUND = "Models/weapons/pistols/makarove/sounds/Pistol_Makarove_Fire_Sound.wav";
     private static final float DAMAGE = 25.f;
     private static final Vector3f DEFAULT_POSITION = new Vector3f(0, -0.95f, 0.61f);
-    private static final Quaternion DEFAULT_ROTATIN = new Quaternion().fromAngles(0.0f, 39.11f, 0.08f);
+    private static final Quaternion DEFAULT_ROTATION = new Quaternion().fromAngles(0.0f, 39.11f, 0.08f);
     private static final Vector3f AIM_POSITION = new Vector3f(0.2f, -0.807f, 0.67f);
-    private static final Quaternion AIM_ROTATIN = new Quaternion().fromAngles(0.0f, 39.096f, -0.00f);
+    private static final Quaternion AIM_ROTATION = new Quaternion().fromAngles(0.0f, 39.096f, -0.00f);
 
     private boolean isAiming = false;
 
@@ -70,7 +70,6 @@ public class PistolMakarove implements Weapon {
 
     //Recoil
     private float recoilAmount = 0.f;
-    private Quaternion currentCamRotation;
 
     public PistolMakarove() {
         this.assetManager = Managers.getInstance().getAsseManager();
@@ -84,7 +83,7 @@ public class PistolMakarove implements Weapon {
         model = this.assetManager.loadModel(PATH_TO_MODEL);
         this.animComposer = ((Node) model).getChild("Armature").getControl(AnimComposer.class);
         model.setLocalTranslation(DEFAULT_POSITION);
-        model.setLocalRotation(DEFAULT_ROTATIN);
+        model.setLocalRotation(DEFAULT_ROTATION);
         animComposer.setCurrentAction(ANIM_ACTION_IDLE);
 
         this.cameraNode.attachChild(model);
@@ -118,7 +117,7 @@ public class PistolMakarove implements Weapon {
     @Override
     public void update(float tpf) {
 
-        this.updatePosition(tpf);
+        this.updatePosition(tpf, this.model, DEFAULT_POSITION, DEFAULT_ROTATION, AIM_POSITION, AIM_ROTATION);
 
         this.recoil(tpf);
     }
@@ -129,22 +128,7 @@ public class PistolMakarove implements Weapon {
         this.fireSound.playInstance();
 
         CollisionResults results = this.rayTo(this.cam.getLocation(), this.cam.getDirection(), shootables);
-
-        for (CollisionResult result : results) {
-            Spatial hitObject = result.getGeometry();
-            while (!(hitObject instanceof Actor)) {
-                if (hitObject.getParent() != null) {
-                    hitObject = hitObject.getParent();
-                } else {
-                    break;
-                }
-            }
-            if (hitObject instanceof Actor) {
-                ((Actor) hitObject).takeDamage(DAMAGE);
-                break;
-            }
-        }
-
+        this.applyDamageToTarget(results);
         this.recoilAmount += 1;
     }
 
@@ -166,29 +150,28 @@ public class PistolMakarove implements Weapon {
         fireOnce.setSpeed(1.0f);
     }
 
-    //aim/default
-    private void updatePosition(float tpf) {
-        if (this.isAiming) {
-            model.getLocalTranslation().interpolateLocal(AIM_POSITION, tpf * 12);
-            model.setLocalRotation(AIM_ROTATIN);
-        } else {
-            model.getLocalTranslation().interpolateLocal(DEFAULT_POSITION, tpf * 12);
-            model.setLocalRotation(DEFAULT_ROTATIN);
-        }
-    }
-
     @Override
     public void setIsAiming(boolean isAiming) {
         this.isAiming = isAiming;
     }
 
+    @Override
+    public boolean isAiming() {
+        return this.isAiming;
+    }
+
     //TODO : fix beshe
     private void recoil(float tpf) {
         if (recoilAmount > 0) {
-           // Vector3f newDir = new Vector3f(this.cam.getDirection().x, this.cam.getDirection().y + 0.003f, this.cam.getDirection().z);
-           // this.cam.lookAtDirection(new Vector3f().interpolateLocal(this.cam.getDirection(), newDir, 0.6f * tpf * 30), cam.getUp());
+            //Vector3f newDir = new Vector3f(this.cam.getDirection().x, this.cam.getDirection().y + 0.003f, this.cam.getDirection().z);
+            // this.cam.lookAtDirection(new Vector3f().interpolateLocal(this.cam.getDirection(), newDir, recoilAmount * tpf * 60), cam.getUp());
             recoilAmount -= tpf;
         }
+    }
+
+    @Override
+    public float getDamage() {
+        return DAMAGE;
     }
 
 }
