@@ -11,6 +11,7 @@ import com.mygame.entity.interfaces.Actor;
 import com.mygame.settings.Managers;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  *
@@ -20,7 +21,7 @@ public class Level1 implements Level {
 
     //Level
     private static final String PATH_TO_SCENE = "Scenes/Level1.j3o";
-    private final List<Actor> actors = new ArrayList();
+    private final List<Actor> actors = new CopyOnWriteArrayList();
     //player
     private static final Vector3f PLAYER_SPAWN_POINT = new Vector3f(0, 0, 0);
 

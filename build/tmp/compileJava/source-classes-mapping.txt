@@ -4,8 +4,8 @@ ExternalLibs/com/jme3/ai/navmesh/Cell.java
  com.jme3.ai.navmesh.Cell$PathResult
 com/mygame/entity/interfaces/Weapon.java
  com.mygame.entity.interfaces.Weapon
-com/mygame/entity/interfaces/AIControllable.java
- com.mygame.entity.interfaces.AIControllable
+com/mygame/entity/ai/zombie/ZombieNormal.java
+ com.mygame.entity.ai.zombie.ZombieNormal
 com/mygame/entity/interfaces/EnumActorState.java
  com.mygame.entity.interfaces.EnumActorState
 com/mygame/entity/interfaces/Actor.java
@@ -52,10 +52,10 @@ ExternalLibs/com/jme3/ai/navmesh/NavMeshPathfinder.java
  com.jme3.ai.navmesh.NavMeshPathfinder$1
 ExternalLibs/com/jme3/ai/navmesh/DebugInfo.java
  com.jme3.ai.navmesh.DebugInfo
-com/mygame/Main.java
- com.mygame.Main
 ExternalLibs/com/jme3/ai/navmesh/Node.java
  com.jme3.ai.navmesh.Node
+com/mygame/entity/weapons/pistol/PistolMakarove.java
+ com.mygame.entity.weapons.pistol.PistolMakarove
 ExternalLibs/com/jme3/ai/navmesh/util/MinHeap.java
  com.jme3.ai.navmesh.util.MinHeap
 com/mygame/settings/GeneralConstants.java
@@ -82,9 +82,9 @@ com/mygame/entity/player/Player.java
  com.mygame.entity.player.Player
 ExternalLibs/com/jme3/ai/steering/behaviour/ObstacleAvoid.java
  com.jme3.ai.steering.behaviour.ObstacleAvoid
-com/mygame/entity/weapons/pistol/PistolMakarove.java
- com.mygame.entity.weapons.pistol.PistolMakarove
+com/mygame/entity/interfaces/AIControllable.java
+ com.mygame.entity.interfaces.AIControllable
 com/mygame/levels/Level1.java
  com.mygame.levels.Level1
-com/mygame/entity/ai/zombie/ZombieNormal.java
- com.mygame.entity.ai.zombie.ZombieNormal
+com/mygame/Main.java
+ com.mygame.Main
