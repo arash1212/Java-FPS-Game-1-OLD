@@ -95,8 +95,8 @@ public class ZombieNormal extends Node implements AIControllable {
         Spatial model = this.assetManager.loadModel(PATH_TO_MODEL);
         this.animComposer = ((Node) model).getChild(0).getControl(AnimComposer.class);
 
-        CapsuleCollisionShape capsule = new CapsuleCollisionShape(1.0f, HEIGHT, 1);
-        this.control = new CharacterControl(capsule, 0.1f);
+        CapsuleCollisionShape capsule = new CapsuleCollisionShape(1.2f, HEIGHT, 1);
+        this.control = new CharacterControl(capsule, 0.2f);
         model.addControl(control);
         this.control.setSpatial(this);
         model.setLocalRotation(new Quaternion().fromAngles(0, 110, 0));

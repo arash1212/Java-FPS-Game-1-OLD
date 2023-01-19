@@ -56,8 +56,8 @@ com/mygame/settings/GeneralUtils.java
  com.mygame.settings.GeneralUtils
 com/mygame/Main.java
  com.mygame.Main
-com/mygame/levels/Level1.java
- com.mygame.levels.Level1
+com/mygame/entity/weapons/pistol/PistolMakarove.java
+ com.mygame.entity.weapons.pistol.PistolMakarove
 ExternalLibs/com/jme3/ai/navmesh/util/MinHeap.java
  com.jme3.ai.navmesh.util.MinHeap
 com/mygame/settings/GeneralConstants.java
@@ -80,13 +80,13 @@ com/mygame/settings/input/InputSettings.java
  com.mygame.settings.input.InputSettings$2
 ExternalLibs/com/jme3/ai/navmesh/util/MaxHeap.java
  com.jme3.ai.navmesh.util.MaxHeap
-com/mygame/entity/ai/zombie/ZombieNormal.java
- com.mygame.entity.ai.zombie.ZombieNormal
+com/mygame/entity/player/Player.java
+ com.mygame.entity.player.Player
 ExternalLibs/com/jme3/ai/steering/behaviour/ObstacleAvoid.java
  com.jme3.ai.steering.behaviour.ObstacleAvoid
 com/mygame/entity/interfaces/AIControllable.java
  com.mygame.entity.interfaces.AIControllable
-com/mygame/entity/player/Player.java
- com.mygame.entity.player.Player
-com/mygame/entity/weapons/pistol/PistolMakarove.java
- com.mygame.entity.weapons.pistol.PistolMakarove
+com/mygame/levels/Level1.java
+ com.mygame.levels.Level1
+com/mygame/entity/ai/zombie/ZombieNormal.java
+ com.mygame.entity.ai.zombie.ZombieNormal

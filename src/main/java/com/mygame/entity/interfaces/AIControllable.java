@@ -63,14 +63,10 @@ public interface AIControllable extends Actor {
      * ********************************Navigation*****************************************
      */
     default void initNavMesh() {
-        Spatial level = Managers.getInstance().getAsseManager().loadModel(Managers.getInstance().getCurrentlyLoadedLevel().getPathToScene());
-        Geometry navMeshGeom = (Geometry) (((Node) level).getChild(GeneralConstants.NAV_MESH_NAME));
+        Node node = (Node) Managers.getInstance().getAsseManager().loadModel(Managers.getInstance().getCurrentlyLoadedLevel().getPathToScene());
+        Geometry navMeshGeom = (Geometry) node.getChild(GeneralConstants.NAV_MESH_NAME);
         NavMesh navMesh = new NavMesh(navMeshGeom.getMesh());
         this.setPathfinder(new NavMeshPathfinder(navMesh));
-
-        if (this.getTarget() == null) {
-            this.setTarget(this);
-        }
     }
 
     default void navigateTo(Vector3f position) {
@@ -88,7 +84,9 @@ public interface AIControllable extends Actor {
                 this.getPathfinder().setPosition(this.getPosition());
                 if (!this.getCurrentNavigationPosition().equals(position)) {
                     this.getCurrentNavigationPosition().set(position);
+                    // this.getPathfinder().clearPath();
                     this.getPathfinder().computePath(this.getCurrentNavigationPosition());
+
                 }
 
                 this.getControl().setWalkDirection(Vector3f.ZERO);
