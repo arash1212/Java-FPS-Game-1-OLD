@@ -35,7 +35,7 @@ public class PistolMakarove implements Weapon {
     //constants
     private static final String PATH_TO_MODEL = "Models/weapons/pistols/makarove/pistol_makarove.j3o";
     private static final String PATH_TO_FIRE_SOUND = "Models/weapons/pistols/makarove/sounds/Pistol_Makarove_Fire_Sound.wav";
-    private static final float DAMAGE = 25.f;
+    private static final float DAMAGE = 10.f;
     private static final Vector3f DEFAULT_POSITION = new Vector3f(0, -0.95f, 0.61f);
     private static final Quaternion DEFAULT_ROTATION = new Quaternion().fromAngles(0.0f, 39.11f, 0.08f);
     private static final Vector3f AIM_POSITION = new Vector3f(0.2f, -0.807f, 0.67f);
@@ -67,6 +67,8 @@ public class PistolMakarove implements Weapon {
     private Action fireOnce;
 
     private final CameraNode cameraNode;
+
+    private Actor owner;
 
     //Recoil
     private float recoilAmount = 0.f;
@@ -172,6 +174,16 @@ public class PistolMakarove implements Weapon {
     @Override
     public float getDamage() {
         return DAMAGE;
+    }
+
+    @Override
+    public Actor getOwner() {
+        return owner;
+    }
+
+    @Override
+    public void setOwner(Actor owner) {
+        this.owner = owner;
     }
 
 }

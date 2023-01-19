@@ -20,10 +20,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Level1 implements Level {
 
     //Level
-    private static final String PATH_TO_SCENE = "Scenes/Level1.j3o";
+    private static final String PATH_TO_SCENE = "Scenes/Level1/Level1.j3o";
     private final List<Actor> actors = new CopyOnWriteArrayList();
     //player
-    private static final Vector3f PLAYER_SPAWN_POINT = new Vector3f(0, 0, 0);
+    private static final Vector3f PLAYER_SPAWN_POINT = new Vector3f(4, -2, 0);
 
     public Level1() {
     }
@@ -71,7 +71,7 @@ public class Level1 implements Level {
     private void spawnZombies() {
         ZombieNormal testZombie = new ZombieNormal();
         testZombie.spawn(new Vector3f(0, 0, 5));
-        testZombie.setTargetPosition(Managers.getInstance().getPlayer().getPosition());
+        testZombie.setTarget(Managers.getInstance().getPlayer());
         this.actors.add(testZombie);
     }
 

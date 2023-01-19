@@ -29,7 +29,7 @@ public class Main extends SimpleApplication {
         cam.setFrustumNear(0.001f);
 
         this.stateManager.attach(bulletAppState);
-        bulletAppState.setDebugEnabled(true);
+       // bulletAppState.setDebugEnabled(true);
 
         initManagers();
 

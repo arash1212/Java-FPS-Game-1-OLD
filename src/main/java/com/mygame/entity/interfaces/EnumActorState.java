@@ -9,5 +9,5 @@ package com.mygame.entity.interfaces;
  * @author Arash
  */
 public enum EnumActorState {
-    STAND_STILL, WALKING, RUNNING, IN_AIR;
+    STAND_STILL, WALKING, RUNNING, IN_AIR, ATTACKING;
 }

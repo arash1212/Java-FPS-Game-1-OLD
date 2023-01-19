@@ -51,10 +51,15 @@ public interface Weapon {
         }
     }
 
+    void setOwner(Actor owner);
+
+    Actor getOwner();
+
     default void applyDamageToTarget(CollisionResults results) {
         for (CollisionResult result : results) {
             Spatial hitObject = result.getGeometry();
             Spatial actorObject = result.getGeometry();
+            System.out.println("pistol hit :" + hitObject.getName());
             while (!(actorObject instanceof Actor)) {
                 if (actorObject.getParent() != null) {
                     actorObject = actorObject.getParent();
@@ -63,7 +68,7 @@ public interface Weapon {
                 }
             }
             if (actorObject instanceof Actor) {
-                ((Actor) actorObject).takeDamage(this.calculateDamage(hitObject));
+                ((Actor) actorObject).takeDamage(this.calculateDamage(hitObject), this.getOwner());
                 break;
             }
         }

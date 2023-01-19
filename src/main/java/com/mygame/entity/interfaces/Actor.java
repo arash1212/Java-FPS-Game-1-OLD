@@ -4,8 +4,14 @@
  */
 package com.mygame.entity.interfaces;
 
+import com.jme3.bullet.collision.PhysicsRayTestResult;
 import com.jme3.bullet.control.CharacterControl;
+import com.jme3.collision.CollisionResults;
+import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Node;
+import com.mygame.settings.Managers;
+import java.util.List;
 
 /**
  *
@@ -49,9 +55,20 @@ public interface Actor {
         return this.getControl().getPhysicsLocation();
     }
 
-    void takeDamage(float damage);
+    void takeDamage(float damage, Actor attacker);
 
     void die();
 
     float getHealth();
+
+    default CollisionResults rayTo(Vector3f origin, Vector3f direction, Node node) {
+        Ray ray = new Ray(origin, direction);
+        CollisionResults results = new CollisionResults();
+        node.collideWith(ray, results);
+        return results;
+    }
+
+    default List<PhysicsRayTestResult> physicsTayTo(Vector3f from, Vector3f to) {
+        return Managers.getInstance().getBulletAppState().getPhysicsSpace().rayTest(from, to);
+    }
 }
