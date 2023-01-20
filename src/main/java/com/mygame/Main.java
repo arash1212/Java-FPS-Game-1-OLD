@@ -29,7 +29,7 @@ public class Main extends SimpleApplication {
         cam.setFrustumNear(0.001f);
 
         this.stateManager.attach(bulletAppState);
-       // bulletAppState.setDebugEnabled(true);
+        // bulletAppState.setDebugEnabled(true);
 
         initManagers();
 
@@ -57,8 +57,6 @@ public class Main extends SimpleApplication {
     private void loadLevel() {
         this.level = new Level1();
         level.load();
-
-        Managers.getInstance().setCurrentlyLoadedLevel(level);
     }
 
     //inits
@@ -73,8 +71,6 @@ public class Main extends SimpleApplication {
         Managers.getInstance().setStateManager(this.stateManager);
         Managers.getInstance().setAppSettings(this.settings);
         Managers.getInstance().setCameraNode(new CameraNode("cameraNode", this.cam));
-        rootNode.attachChild(Managers.getInstance().getCameraNode());
-
     }
 
     private void initNodes() {

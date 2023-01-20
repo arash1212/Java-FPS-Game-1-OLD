@@ -127,6 +127,8 @@ public class Managers {
     public void setCameraNode(CameraNode cameraNode) {
         this.cameraNode = cameraNode;
         this.cameraNode.setControlDir(CameraControl.ControlDirection.CameraToSpatial);
+
+        this.rootNode.attachChild(Managers.getInstance().getCameraNode());
     }
 
     public Level getCurrentlyLoadedLevel() {

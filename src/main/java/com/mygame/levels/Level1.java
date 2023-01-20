@@ -31,6 +31,7 @@ public class Level1 implements Level {
     @Override
     public void load() {
         this.init();
+        Managers.getInstance().setCurrentlyLoadedLevel(this);
 
         this.spawnPlayer();
 

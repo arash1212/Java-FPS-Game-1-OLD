@@ -108,6 +108,7 @@ public interface AIControllable extends Actor {
                     this.getControl().setWalkDirection(Vector3f.ZERO);
                 }
             } else {
+                System.out.println("Cant Move");
                 this.getControl().setWalkDirection(Vector3f.ZERO);
                 this.getPathfinder().computePath(this.getPosition());
             }

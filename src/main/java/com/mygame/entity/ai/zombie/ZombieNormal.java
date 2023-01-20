@@ -95,8 +95,8 @@ public class ZombieNormal extends Node implements AIControllable {
         Spatial model = this.assetManager.loadModel(PATH_TO_MODEL);
         this.animComposer = ((Node) model).getChild(0).getControl(AnimComposer.class);
 
-        CapsuleCollisionShape capsule = new CapsuleCollisionShape(1.2f, HEIGHT, 1);
-        this.control = new CharacterControl(capsule, 0.2f);
+        CapsuleCollisionShape capsule = new CapsuleCollisionShape(1.3f, HEIGHT, 1);
+        this.control = new CharacterControl(capsule, 1.001f);
         model.addControl(control);
         this.control.setSpatial(this);
         model.setLocalRotation(new Quaternion().fromAngles(0, 110, 0));
@@ -113,6 +113,7 @@ public class ZombieNormal extends Node implements AIControllable {
     @Override
     public void spawn(Vector3f spawnPoint) {
         this.init();
+        this.initNavMesh();
 
         this.control.setPhysicsLocation(spawnPoint);
     }
@@ -121,10 +122,10 @@ public class ZombieNormal extends Node implements AIControllable {
     public void update(float tpf) {
         this.currentTime += tpf;
 
-        if (this.pathfinder == null && Managers.getInstance().getCurrentlyLoadedLevel() != null) {
-            this.initNavMesh();
-            this.target = Managers.getInstance().getPlayer();
-        }
+       // if (this.pathfinder == null && Managers.getInstance().getCurrentlyLoadedLevel() != null) {
+
+       //     // this.target = Managers.getInstance().getPlayer();
+       // }
 
         this.updateActorState();
 
