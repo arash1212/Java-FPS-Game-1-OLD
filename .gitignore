@@ -29,5 +29,16 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+###New
+/*/nb-configuration.xml
+/nbproject/
+/*/nbproject/
+/*/target/
+/*/build/
+/netbeans-gradle-default-models/gradle-api/
+.gradle/
+/.nb-gradle-properties
+.nb-gradle/
+
 ### VS Code ###
 .vscode/
